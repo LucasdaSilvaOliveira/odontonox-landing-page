@@ -1564,7 +1564,8 @@ select {
    ============================================ */
 .integrations__grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    /* justify-content: center; */
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
 
@@ -2041,7 +2042,7 @@ select {
     }
 
     .integrations__grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .footer__grid {
