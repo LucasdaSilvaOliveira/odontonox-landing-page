@@ -5,11 +5,12 @@
 
 /* --- Variables --- */
 :root {
-    --color-primary: #0B1D3A;
-    --color-primary-light: #132B52;
-    --color-accent: #2563EB;
-    --color-accent-hover: #1D4ED8;
-    --color-accent-light: #3B82F6;
+    /* --color-primary: #1dafa11a; */
+    --color-primary: #062320;
+    --color-primary-light: #3a6d69;
+    --color-accent: #1dafa1;
+    --color-accent-hover: #1a796f;
+    --color-accent-light: #40c7b9;
     --color-accent-glow: rgba(37, 99, 235, 0.25);
     --color-white: #FFFFFF;
     --color-gray-50: #F8FAFC;
@@ -327,6 +328,10 @@ select {
     font-size: 20px;
     font-weight: 700;
     color: var(--color-primary);
+}
+
+.logo img {
+    width: 200px;
 }
 
 .logo__accent {
@@ -1768,7 +1773,7 @@ select {
    CTA FINAL
    ============================================ */
 .cta-final {
-    background: linear-gradient(135deg, var(--color-primary) 0%, #0F2B5B 50%, var(--color-primary-light) 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, #0e3f3be5 50%, var(--color-primary-light) 100%);
     color: var(--color-white);
     position: relative;
     overflow: hidden;
