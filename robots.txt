@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://odontonox.com.br/sitemap.xml
