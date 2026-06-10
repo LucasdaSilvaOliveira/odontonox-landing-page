@@ -110,59 +110,124 @@
         });
     }
 
-    function handleFormSubmit(e) {
-        e.preventDefault();
-        clearFormErrors();
+    // function handleFormSubmit(e) {
+    //     e.preventDefault();
+    //     clearFormErrors();
 
-        var name = document.getElementById('name');
-        var email = document.getElementById('email');
-        var phone = document.getElementById('phone');
-        var clinic = document.getElementById('clinic');
-        var role = document.getElementById('role');
-        var hasError = false;
+    //     var name = document.getElementById('name');
+    //     var email = document.getElementById('email');
+    //     var phone = document.getElementById('phone');
+    //     var type = document.getElementById('tipo');
+    //     var hasError = false;
 
-        if (!name.value.trim()) {
-            name.classList.add('is-error');
-            hasError = true;
-        }
+    //     if (!name.value.trim()) {
+    //         name.classList.add('is-error');
+    //         hasError = true;
+    //     }
 
-        if (!validateEmail(email.value.trim())) {
-            email.classList.add('is-error');
-            hasError = true;
-        }
+    //     if (!validateEmail(email.value.trim())) {
+    //         email.classList.add('is-error');
+    //         hasError = true;
+    //     }
 
-        if (!validatePhone(phone.value.trim())) {
-            phone.classList.add('is-error');
-            hasError = true;
-        }
+    //     if (!validatePhone(phone.value.trim())) {
+    //         phone.classList.add('is-error');
+    //         hasError = true;
+    //     }
 
-        if (!clinic.value.trim()) {
-            clinic.classList.add('is-error');
-            hasError = true;
-        }
+    //     if (!type.value.trim()) {
+    //         type.classList.add('is-error');
+    //         hasError = true;
+    //     }
 
-        if (!role.value) {
-            role.classList.add('is-error');
-            hasError = true;
-        }
+    //     if (hasError) {
+    //         showToast('Por favor, preencha todos os campos corretamente.', 'error');
+    //         return;
+    //     }
 
-        if (hasError) {
-            showToast('Por favor, preencha todos os campos corretamente.', 'error');
-            return;
-        }
+    //     var submitBtn = contactForm.querySelector('[type="submit"]');
+    //     var originalText = submitBtn.textContent;
+    //     submitBtn.textContent = 'Enviando...';
+    //     submitBtn.disabled = true;
 
-        var submitBtn = contactForm.querySelector('[type="submit"]');
-        var originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Enviando...';
-        submitBtn.disabled = true;
+    //     setTimeout(function () {
+    //         showToast('Demonstração agendada com sucesso! Entraremos em contato em breve.', 'success');
+    //         contactForm.reset();
+    //         submitBtn.textContent = originalText;
+    //         submitBtn.disabled = false;
+    //     }, 1200);
+    // }
 
-        setTimeout(function () {
-            showToast('Demonstração agendada com sucesso! Entraremos em contato em breve.', 'success');
-            contactForm.reset();
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-        }, 1200);
+    async function handleFormSubmit(e) {
+    e.preventDefault();
+    clearFormErrors();
+
+    var name = document.getElementById('name');
+    var email = document.getElementById('email');
+    var phone = document.getElementById('phone');
+    var type = document.getElementById('tipo');
+    var hasError = false;
+
+    if (!name.value.trim()) {
+        name.classList.add('is-error');
+        hasError = true;
     }
+
+    if (!validateEmail(email.value.trim())) {
+        email.classList.add('is-error');
+        hasError = true;
+    }
+
+    if (!validatePhone(phone.value.trim())) {
+        phone.classList.add('is-error');
+        hasError = true;
+    }
+
+    if (!type.value.trim()) {
+        type.classList.add('is-error');
+        hasError = true;
+    }
+
+    if (hasError) {
+        showToast('Por favor, preencha todos os campos corretamente.', 'error');
+        return;
+    }
+
+    var submitBtn = contactForm.querySelector('[type="submit"]');
+    var originalText = submitBtn.textContent;
+
+    submitBtn.textContent = 'Enviando...';
+    submitBtn.disabled = true;
+
+    try {
+        const response = await fetch("https://formspree.io/f/xgobzryr", {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: name.value,
+                email: email.value,
+                phone: phone.value,
+                type: type.value
+            })
+        });
+
+        if (response.ok) {
+            showToast('Demonstração agendada com sucesso!', 'success');
+            contactForm.reset();
+        } else {
+            showToast('Erro ao enviar. Tente novamente.', 'error');
+        }
+
+    } catch (error) {
+        showToast('Erro de conexão.', 'error');
+    }
+
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+}
 
     /* --- Phone Mask --- */
     function maskPhone(input) {
