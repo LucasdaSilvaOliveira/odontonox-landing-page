@@ -1673,6 +1673,10 @@ select {
     margin-bottom: 28px;
 }
 
+.pricing-card__price small {
+    font-size: 12px;
+}
+
 .pricing-card__currency {
     font-size: 18px;
     font-weight: 600;
